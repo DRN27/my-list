@@ -1,0 +1,59 @@
+.header {
+    height: 60px;
+    width: 100%;
+    background: pink;
+    padding: 0 30px;
+    position: fixed;
+    z-index: 10;
+
+    .header-container {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.content {
+    padding: 30px 50px;
+    position: absolute;
+    top: 60px;
+    min-height: 100%;
+    width: 100%;
+    background: #b8b8fd;
+}
+
+.create_list_modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(192, 192, 192, 0.9);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+
+    .form {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        background: #fff;
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px 30px;
+    }
+
+    .form-label {
+        margin: 10px 0 0 0;
+    }
+
+    .form-control {
+        margin: 10px 0;
+    }
+
+    .btn_wrapper button:first-child {
+        margin-right: 25px;
+    }
+}

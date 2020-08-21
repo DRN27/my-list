@@ -1,0 +1,34 @@
+<div>
+    <div class="header">
+        <div class="header-container">
+            <div class="logo">LOGO</div>
+            <button (click)="openModal()" class="btn btn-primary">Создать список</button>
+        </div>
+    </div>
+    <div class="content">
+        <app-list-item
+            *ngFor="let i of allLists"
+            [item]="i"
+            (click)="openList(i)"
+        ></app-list-item>
+    </div>
+</div>
+
+
+<div class="create_list_modal" *ngIf="showCreateListModal">
+    <form class="form" (submit)="addList()" [formGroup]="addListForm">
+        <p class="form-label">Введите название списка</p>
+        <input type="text" class="form-control" formControlName="listName">
+
+        <div class="btn_wrapper">
+            <button
+                class="btn btn-primary"
+                [disabled]="addListForm.invalid"
+                [class.disabled-btn]="addListForm.invalid"
+            >
+                Создать
+            </button>
+            <button (click)="showCreateListModal = false" class="btn btn-warning">Отменить</button>
+        </div>
+    </form>
+</div>
