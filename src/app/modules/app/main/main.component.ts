@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ListService} from '../../../services/list.service';
-import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
-import {loggedIn} from '@angular/fire/auth-guard';
 
 
 @Component({
@@ -22,16 +20,16 @@ export class MainComponent implements OnInit, OnDestroy {
 	    public listService: ListService,
         private router: Router
     ) {
-	    this.listService.getAllLists();
-	    this.subscription = this.listService.allLists.subscribe(data => {
-            this.allLists = data;
-        });
 	    this.addListForm = new FormGroup({
            listName: new FormControl(null, [Validators.required])
         });
 	}
 
 	ngOnInit(): void {
+        this.listService.getAllLists();
+        this.subscription = this.listService.allLists.subscribe(data => {
+            this.allLists = data;
+        });
 	}
 
 	openModal() {
@@ -39,12 +37,20 @@ export class MainComponent implements OnInit, OnDestroy {
         this.showCreateListModal = true;
     }
 
-	addList() {
-	    this.listService.addList(this.addListForm.value);
+	async addList() {
+	    const data = this.addListForm.value;
+	    data.records = ['test'];
+	    const res = await this.listService.addList(data);
+	    this.allLists.filter(item => {
+            if (item.listName === this.addListForm.value.listName) {
+                item.key = res.key;
+            }
+        });
         this.showCreateListModal = false;
 	}
 
 	openList(title) {
+	    this.listService.currentList = title;
         this.router.navigate([`list/${title}`]);
     }
 

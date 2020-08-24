@@ -6,32 +6,37 @@
         </div>
     </div>
     <div class="content">
-        <div class="item">
-            <div class="img"></div>
-            <p class="title">title</p>
-            <p class="description">description</p>
-            <div class="full-info">подробнее</div>
-        </div>
-
-        <div class="item">
-            <div class="img"></div>
-            <p class="title">title</p>
-            <p class="description">description</p>
-            <div class="full-info">подробнее</div>
-        </div>
-
-        <div class="item">
-            <div class="img"></div>
-            <p class="title">title</p>
-            <p class="description">description</p>
-            <div class="full-info">подробнее</div>
-        </div>
-
-        <div class="item">
+        <div class="item" (click)="update()">
             <div class="img"></div>
             <p class="title">title</p>
             <p class="description">description</p>
             <div class="full-info">подробнее</div>
         </div>
     </div>
+</div>
+
+<div class="create_list_modal" *ngIf="showModal">
+    <form class="form" (submit)="addRecord()" [formGroup]="addRecordForm">
+        <p class="form-label">Введите название списка</p>
+        <input type="text" class="form-control" formControlName="title">
+        <p class="form-label">Введите автора</p>
+        <input type="text" class="form-control" formControlName="author">
+        <p class="form-label">Загрузите обложку</p>
+        <input type="file">
+        <p class="form-label">Введите оценку</p>
+        <div>рейтинг</div>
+        <p class="form-label">Введите описание</p>
+        <input type="text" class="form-control" formControlName="description">
+
+        <div class="btn_wrapper">
+            <button
+                class="btn btn-primary"
+                [disabled]="addRecordForm.invalid"
+                [class.disabled-btn]="addRecordForm.invalid"
+            >
+                Создать
+            </button>
+            <button (click)="showModal = false" class="btn btn-warning">Отменить</button>
+        </div>
+    </form>
 </div>
